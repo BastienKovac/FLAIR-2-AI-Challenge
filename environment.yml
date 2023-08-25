@@ -1,0 +1,25 @@
+name : flair
+channels : 
+  - conda-forge
+  - defaults
+dependencies :
+  - python==3.10
+  - albumentations
+  - matplotlib
+  - numpy
+  - omegaconf
+  - pandas
+  - Pillow
+  - pytorch
+  - pytorch-lightning==1.9.5
+  - PyYAML
+  - rasterio
+  - rich
+  - scikit-image
+  - scikit-learn
+  - segmentation-models-pytorch
+  - torchmetrics
+  - torchvision
+  - tensorboard
+  - jupyter
+

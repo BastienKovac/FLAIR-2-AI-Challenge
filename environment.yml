@@ -1,6 +1,8 @@
 name : flair
 channels : 
   - conda-forge
+  - pytorch
+  - nvidia
   - defaults
 dependencies :
   - python==3.10
@@ -10,7 +12,7 @@ dependencies :
   - omegaconf
   - pandas
   - Pillow
-  - pytorch
+  - pytorch-cuda==11.7
   - pytorch-lightning==1.9.5
   - PyYAML
   - rasterio

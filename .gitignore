@@ -129,3 +129,10 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# folder train
+notebook/lightning_logs/*
+notebook/lightning_logs
+lightning_logs/
+flair-2-config.yml
+notebook/flair-2-notebook.ipynb

@@ -55,6 +55,7 @@ class DataModule(LightningDataModule):
             shuffle=True,
             num_workers=self.config["num_workers"],
             drop_last=self.drop_last,
+            persistent_workers=True,
             collate_fn=pad_collate_train,
         )
 
@@ -63,7 +64,7 @@ class DataModule(LightningDataModule):
             dataset=self.val_dataset,
             batch_size=self.config["batch_size"],
             shuffle=False,
-            num_workers=self.config["num_workers"],
+            num_workers=0,
             drop_last=self.drop_last,
             collate_fn=pad_collate_train,
         )

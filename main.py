@@ -7,11 +7,11 @@ import torch
 import torch.nn as nn
 import torch.distributed as dist
 
-from pytorch_lightning.loggers import TensorBoardLogger
+from pytorch_lightning.loggers import TensorBoardLogger, WandbLogger
 from pytorch_lightning.callbacks import EarlyStopping, ModelCheckpoint
 from pytorch_lightning.callbacks.progress.tqdm_progress import TQDMProgressBar
 from pytorch_lightning import Trainer, seed_everything
-from pytorch_lightning.utilities.distributed import rank_zero_only 
+from pytorch_lightning.utilities import rank_zero_only 
 
 import albumentations as A
 
@@ -28,6 +28,7 @@ from src.prediction_writer import PredictionWriter
 argParser = argparse.ArgumentParser()
 argParser.add_argument("--config_file", help="Path to the .yml config file")
 
+torch.set_float32_matmul_precision('high')
 
 def main(config):
 
@@ -63,7 +64,7 @@ def main(config):
     #track_model()
 
     # Optimizer and Loss
-    optimizer = torch.optim.SGD(model.parameters(), lr=config["lr"])
+    optimizer = torch.optim.AdamW(model.parameters(), lr=config["lr"])
 
     with torch.no_grad():
         weights_aer = torch.FloatTensor(np.array(list(config['weights_aerial_satellite'].values()))[:,0])
@@ -112,8 +113,14 @@ def main(config):
         name=Path("tensorboard_logs"+'_'+config["out_model_name"]).as_posix()
     )
 
+    wandb_logger = WandbLogger(
+        project="flair-2-ai-challenge",
+        save_dir=out_dir
+    )
+
     loggers = [
-        logger
+        logger,
+        wandb_logger
     ]
 
     # Train 

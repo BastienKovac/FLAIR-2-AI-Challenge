@@ -1,16 +1,16 @@
 data:
-    path_aerial_train: "" # ./flair_aerial_train/
-    path_sen_train: ""  # ./flair_sen_train/
-    path_labels_train: "" # ./flair_labels_train/
- 
-    path_aerial_test: "" # ./flair_2_aerial_test/
-    path_sen_test: "" # ./flair_2_sen_test/
+    path_aerial_train: "E:\\AI Data\\Challenge IGN Flair2\\Toy Dataset\\flair_2_toy_aerial_train"
+    path_sen_train: "E:\\AI Data\\Challenge IGN Flair2\\Toy Dataset\\flair_2_toy_sen_train"
+    path_labels_train: "E:\\AI Data\\Challenge IGN Flair2\\Toy Dataset\\flair_2_toy_labels_train"
 
-    path_sp_centroids: "" # ./flair_2_centroids_sp_to_patch.json
-    path_metadata_aerial: "" # ./flair_aerial_metadata.json
+    path_aerial_test: "E:\\AI Data\\Challenge IGN Flair2\\Toy Dataset\\flair_2_toy_aerial_test"
+    path_sen_test: "E:\\AI Data\\Challenge IGN Flair2\\Toy Dataset\\flair_2_toy_sen_test"
+
+    path_sp_centroids: "E:\\AI Data\\Challenge IGN Flair2\\Toy Dataset\\flair-2_centroids_sp_to_patch.json"
+    path_metadata_aerial: "E:\\AI Data\\Challenge IGN Flair2\\Toy Dataset\\flair-2_aerial_metadata.json"
 
 out_folder: "./flair2/"
-out_model_name: "flair-2-baseline"
+out_model_name: "flair-2-baseline-toy"
 
 
 

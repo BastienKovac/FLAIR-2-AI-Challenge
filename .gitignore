@@ -136,3 +136,5 @@ notebook/lightning_logs
 lightning_logs/
 notebook/flair-2-notebook.ipynb
 flair-2-config.yml
+# Trained models
+flair-2/

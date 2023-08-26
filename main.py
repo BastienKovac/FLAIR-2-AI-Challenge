@@ -24,6 +24,9 @@ from src.load_data import load_data
 from src.prediction_writer import PredictionWriter
 #from src.metrics import generate_miou
 
+import warnings
+warnings.filterwarnings("ignore", category=DeprecationWarning)
+
 
 argParser = argparse.ArgumentParser()
 argParser.add_argument("--config_file", help="Path to the .yml config file")
@@ -35,7 +38,7 @@ def main(config):
     seed_everything(2022, workers=True)
     out_dir = Path(config["out_folder"], config["out_model_name"])
     out_dir.mkdir(parents=True, exist_ok=True)
-    
+
     d_train, d_val, d_test = load_data(config)
 
     # Augmentation

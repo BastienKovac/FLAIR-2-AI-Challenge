@@ -67,6 +67,7 @@ class SegmentationTask(pl.LightningModule):
 
     def training_step(self, batch, batch_idx):
         loss, preds, targets = self.step(batch)
+        self.log("train/loss", loss)
         return {"loss": loss, "preds": preds, "targets": targets}
 
     def training_step_end(self, step_output):

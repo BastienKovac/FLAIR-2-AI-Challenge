@@ -134,5 +134,5 @@ dmypy.json
 notebook/lightning_logs/*
 notebook/lightning_logs
 lightning_logs/
-flair-2-config.yml
 notebook/flair-2-notebook.ipynb
+flair-2-config.yml

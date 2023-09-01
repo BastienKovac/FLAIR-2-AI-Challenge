@@ -16,6 +16,7 @@ from pytorch_lightning.utilities import rank_zero_only
 import albumentations as A
 
 from src.backbones.txt_model import TimeTexture_flair
+from src.backbones.deeplab_model import TimeTexture_flair_Deeplab
 from src.datamodule import DataModule
 from src.task_module import SegmentationTask
 from src.utils_prints import print_config, print_metrics, print_inference_time
@@ -59,7 +60,8 @@ def main(config):
         augmentation_set = transform_set 
     )
 
-    model = TimeTexture_flair(config)
+    # model = TimeTexture_flair(config)
+    model = TimeTexture_flair_Deeplab(config)
 
     #@rank_zero_only
     #def track_model():

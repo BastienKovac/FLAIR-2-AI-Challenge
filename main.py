@@ -91,7 +91,7 @@ def main(config):
         monitor="val_loss",
         dirpath=os.path.join(out_dir,"checkpoints"),
         filename="ckpt-{epoch:02d}-{val_loss:.2f}"+'_'+config["out_model_name"],
-        save_top_k=1,
+        save_top_k=5,
         mode="min",
         save_weights_only=True, # can be changed accordingly
     )

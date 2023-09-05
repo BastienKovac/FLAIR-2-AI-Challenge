@@ -6,6 +6,7 @@ import numpy as np
 import torch
 import torch.nn as nn
 import torch.distributed as dist
+from torch.optim.lr_scheduler import ReduceLROnPlateau
 
 from pytorch_lightning.loggers import TensorBoardLogger, WandbLogger
 from pytorch_lightning.callbacks import EarlyStopping, ModelCheckpoint
@@ -82,7 +83,8 @@ def main(config):
         num_classes=config["num_classes"],
         criterion=nn.ModuleList([criterion_vhr, criterion_hr]),
         optimizer=optimizer,
-        config=config
+        config=config,
+        scheduler=ReduceLROnPlateau(optimizer, patience=8, factor=0.2)
     )
 
     # Callbacks
@@ -91,7 +93,7 @@ def main(config):
         monitor="val_loss",
         dirpath=os.path.join(out_dir,"checkpoints"),
         filename="ckpt-{epoch:02d}-{val_loss:.2f}"+'_'+config["out_model_name"],
-        save_top_k=5,
+        save_top_k=10,
         mode="min",
         save_weights_only=True, # can be changed accordingly
     )
@@ -136,6 +138,7 @@ def main(config):
         num_nodes=config["num_nodes"],
         max_epochs=config["num_epochs"],
         num_sanity_val_steps=0,
+        precision=16,
         callbacks = callbacks,
         logger=loggers,
         enable_progress_bar = config["enable_progress_bar"],

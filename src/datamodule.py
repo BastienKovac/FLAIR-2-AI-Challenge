@@ -24,7 +24,10 @@ class DataModule(LightningDataModule):
         self.drop_last = drop_last
         self.config = config
         self.augmentation_set = augmentation_set
-
+        if self.config["num_workers"] != 0:
+            self.persistent = True
+        else:
+            self.persistent = False
 
     def prepare_data(self):
         pass
@@ -55,7 +58,7 @@ class DataModule(LightningDataModule):
             shuffle=True,
             num_workers=self.config["num_workers"],
             drop_last=self.drop_last,
-            persistent_workers=True,
+            persistent_workers=self.persistent,
             collate_fn=pad_collate_train,
         )
 

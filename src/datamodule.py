@@ -58,14 +58,14 @@ class DataModule(LightningDataModule):
             shuffle=True,
             num_workers=self.config["num_workers"],
             drop_last=self.drop_last,
-            persistent_workers=self.persistent,
+            persistent_workers=False,
             collate_fn=pad_collate_train,
         )
 
     def val_dataloader(self):
         return DataLoader(
             dataset=self.val_dataset,
-            batch_size=self.config["batch_size"],
+            batch_size=self.config["batch_size"]//2,
             shuffle=False,
             num_workers=0,
             drop_last=self.drop_last,
@@ -77,7 +77,7 @@ class DataModule(LightningDataModule):
             dataset=self.pred_dataset,
             batch_size=self.config['batch_size_inference'], 
             shuffle=False,
-            num_workers=self.config["num_workers"],
+            num_workers=0,
             drop_last=self.drop_last,
             collate_fn=pad_collate_predict
         )

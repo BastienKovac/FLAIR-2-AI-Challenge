@@ -58,7 +58,7 @@ class DataModule(LightningDataModule):
             shuffle=True,
             num_workers=self.config["num_workers"],
             drop_last=self.drop_last,
-            persistent_workers=False,
+            persistent_workers=self.persistent,
             collate_fn=pad_collate_train,
         )
 

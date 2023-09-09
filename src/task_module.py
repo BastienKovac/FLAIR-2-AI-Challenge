@@ -2,7 +2,7 @@ import torch
 import torchvision.transforms as T
 from torchmetrics import MeanMetric, JaccardIndex
 import pytorch_lightning as pl
-
+import gc
 
 class SegmentationTask(pl.LightningModule):
     def __init__(
@@ -77,7 +77,7 @@ class SegmentationTask(pl.LightningModule):
             step_output["preds"],
             step_output["targets"],
         )
-        self.train_loss.update(loss)
+        self.train_loss.update(loss.item().detach())
         self.train_metrics(preds=preds, target=targets)
         return loss
 
@@ -95,6 +95,7 @@ class SegmentationTask(pl.LightningModule):
         )
         self.train_loss.reset()
         self.train_metrics.reset()
+        gc.collect()
 
     def validation_step(self, batch, batch_idx):
         loss, preds, targets = self.step(batch)
@@ -106,7 +107,7 @@ class SegmentationTask(pl.LightningModule):
             step_output["preds"],
             step_output["targets"]
         )
-        self.val_loss.update(loss)
+        self.val_loss.update(loss.item().detach())
         self.val_metrics(preds=preds, target=targets)
         return loss
 
@@ -131,6 +132,7 @@ class SegmentationTask(pl.LightningModule):
             rank_zero_only=True)
         self.val_loss.reset()
         self.val_metrics.reset()
+        gc.collect()
 
     def predict_step(self, batch, batch_idx, dataloader_idx=0):
 
